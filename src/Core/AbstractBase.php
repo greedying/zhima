@@ -78,11 +78,21 @@ abstract class AbstractBase
 	}
 
 	public function __call($name, $params) {
-		if (strncasecmp($name, 'set', 3) === 0 || 
-			strncasecmp($name, 'get', 3)) {
+		if (strncasecmp($name, 'get', 3) === 0) {
 			$attribute = strtolower(substr($name, 3));
-			if (isset($this->attributes[$attribute])) {
-				return call_user_func_array([$this, $name], $params);
+			if (
+				isset($this->sys_attributes[$attribute]) ||
+				isset($this->biz_attributes[$attribute])
+			) {
+				return $this->getAttribute($attribute);
+			}
+		} else if (strncasecmp($name, 'set', 3) === 0) {
+			$attribute = strtolower(substr($name, 3));
+			if (
+				isset($this->sys_attributes[$attribute]) ||
+				isset($this->biz_attributes[$attribute])
+			) {
+				return $this->setAttribute($attribute, $params[0]);
 			}
 		}
 		throw new Exception('Methord ' . get_class($this) . '.' . $name . 'is not defined');
