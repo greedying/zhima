@@ -27,16 +27,17 @@ class Auth extends AbstractBase
     public function __construct(Container $application)
     {
 		parent::__construct($application);
-		$this->method = 'zhima.auth.info.authorize';
     }
 
 	public function getH5Url($params = null) {
+		$this->method = 'zhima.auth.info.authorize';
 		$this->channel = 'app';
 		$this->auth_code = 'M_H5';
 		return $this->getUrl();
 	}
 
 	public function getPcUrl($params = null) {
+		$this->method = 'zhima.auth.info.authorize';
 		$this->channel = 'apppc';
 		$this->auth_code = 'M_APPPC_CERT';
 		return $this->getUrl();
