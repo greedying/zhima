@@ -11,15 +11,12 @@
 
 ## Installation
 
-可以使用composer引用，但目前只支持 VCS形式
+可以使用composer引用
 
 ```bash
 "require": {
 	"greedying/zhima" : "dev-master"
 },
-"repositories": [
-	{"type": "vcs", "url": "https://github.com/greedying/zhima"},
-]
 ```
 
 
