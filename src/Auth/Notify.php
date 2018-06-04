@@ -22,7 +22,7 @@ class Notify
     /**
      * Encryptor instance.
      *
-	 * @var Greedying\Zhima\Encryption\Encryptor;
+     * @var Greedying\Zhima\Encryption\Encryptor;
      */
     protected $encryptor;
 
@@ -40,14 +40,14 @@ class Notify
      */
     protected $notify;
 
-	//GET参数中的params参数
-	protected $params = '';
+    //GET参数中的params参数
+    protected $params = '';
 
-	//GET参数中的sign参数
-	protected $sign = '';
+    //GET参数中的sign参数
+    protected $sign = '';
 
-	//解密后的结果字符串
-	protected $result = '';
+    //解密后的结果字符串
+    protected $result = '';
 
     /**
      * Constructor.
@@ -61,26 +61,29 @@ class Notify
         $this->request = $request ?: Request::createFromGlobals();
     }
 
-	public function getParams() {
-		if ($this->params == '') {
-			$this->params = $this->request->get('params');
-		}
-		return $this->params;
-	}
+    public function getParams()
+    {
+        if ($this->params == '') {
+            $this->params = $this->request->get('params');
+        }
+        return $this->params;
+    }
 
-	public function getSign() {
-		if ($this->sign == '') {
-			$this->sign = $this->request->get('sign');
-		}
-		return $this->sign;
-	}
+    public function getSign()
+    {
+        if ($this->sign == '') {
+            $this->sign = $this->request->get('sign');
+        }
+        return $this->sign;
+    }
 
-	public function getResult() {
-		if ($this->result == '') {
-			$this->result = $this->encryptor->rsaDecrypt($this->getParams());
-		}
-		return $this->result;
-	}
+    public function getResult()
+    {
+        if ($this->result == '') {
+            $this->result = $this->encryptor->rsaDecrypt($this->getParams());
+        }
+        return $this->result;
+    }
 
     /**
      * Validate the request params.
@@ -89,7 +92,7 @@ class Notify
      */
     public function isValid()
     {
-		return $this->encryptor->verify($this->getResult(), $this->getSign());
+        return $this->encryptor->verify($this->getResult(), $this->getSign());
     }
 
     /**
@@ -105,7 +108,7 @@ class Notify
             return $this->notify;
         }
 
-		parse_str($this->getResult(), $data);
+        parse_str($this->getResult(), $data);
 
         return $this->notify = new Collection($data);
     }

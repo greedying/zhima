@@ -60,7 +60,8 @@ class Encryptor
      * @param $data 私钥，默认是配置文件中的私钥
      * @return string 签名
      */
-    public function sign($data, $private_key = null) {
+    public function sign($data, $private_key = null)
+    {
         $private_key = $private_key ?: $this->private_key;
         $res = openssl_get_privatekey($private_key);
         openssl_sign($data, $sign, $res);
@@ -76,7 +77,8 @@ class Encryptor
      * @param $public_key 公钥，默认是配置文件中的芝麻信用公钥
      * @return bool 验签是否成功
      */
-    public function verify($data, $sign, $public_key = null) {
+    public function verify($data, $sign, $public_key = null)
+    {
         $public_key = $public_key ?: $this->zhima_public_key;
 
         //转换为openssl格式密钥
@@ -98,7 +100,8 @@ class Encryptor
      * @param $pubKeyFilePath 公钥文件路径
      * @return string 加密后的密文
      */
-    public function rsaEncrypt($data, $public_key = null){
+    public function rsaEncrypt($data, $public_key = null)
+    {
         $public_key = $public_key ?: $this->zhima_public_key;
 
         //转换为openssl格式密钥
@@ -107,10 +110,10 @@ class Encryptor
         $maxlength = $this->getMaxEncryptBlockSize($res);
 
         $output='';
-        while($data){
-            $input= substr($data,0,$maxlength);
-            $data=substr($data,$maxlength);
-            openssl_public_encrypt($input,$encrypted,$public_key);
+        while ($data) {
+            $input= substr($data, 0, $maxlength);
+            $data=substr($data, $maxlength);
+            openssl_public_encrypt($input, $encrypted, $public_key);
             $output.= $encrypted;
         }
         $encryptedData =  base64_encode($output);
@@ -122,7 +125,8 @@ class Encryptor
      * @param $data 要解密的数据
      * @return string 解密后的明文
      */
-    public function rsaDecrypt($data, $private_key = null){
+    public function rsaDecrypt($data, $private_key = null)
+    {
         $private_key = $private_key ?: $this->private_key;
 
         //转换为openssl格式密钥
@@ -130,8 +134,8 @@ class Encryptor
         $data = base64_decode($data);
         $maxlength = $this->getMaxDecryptBlockSize($res);
         $output='';
-        while($data){
-            $input = substr($data, 0 ,$maxlength);
+        while ($data) {
+            $input = substr($data, 0, $maxlength);
             $data = substr($data, $maxlength);
             openssl_private_decrypt($input, $out, $res);
             $output .= $out;
@@ -145,7 +149,8 @@ class Encryptor
      * @param $keyRes
      * @return float
      */
-    public static function getMaxEncryptBlockSize($keyRes){
+    public static function getMaxEncryptBlockSize($keyRes)
+    {
         $keyDetail = openssl_pkey_get_details($keyRes);
         $modulusSize = $keyDetail['bits'];
         return $modulusSize/8 - 11;
@@ -157,10 +162,10 @@ class Encryptor
      * @param $keyRes
      * @return float
      */
-    public static function getMaxDecryptBlockSize($keyRes){
+    public static function getMaxDecryptBlockSize($keyRes)
+    {
         $keyDetail = openssl_pkey_get_details($keyRes);
         $modulusSize = $keyDetail['bits'];
         return $modulusSize/8;
     }
-
 }

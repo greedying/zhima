@@ -30,9 +30,8 @@ class ScoreServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-
         $pimple['score'] = function ($pimple) {
-			return new Score($pimple);
+            return new Score($pimple);
         };
     }
 }

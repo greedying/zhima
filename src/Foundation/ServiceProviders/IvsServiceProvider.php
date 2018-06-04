@@ -30,9 +30,8 @@ class IvsServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-
         $pimple['ivs'] = function ($pimple) {
-			return new Ivs($pimple);
+            return new Ivs($pimple);
         };
     }
 }
