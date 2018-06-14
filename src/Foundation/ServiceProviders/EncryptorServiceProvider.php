@@ -30,10 +30,8 @@ class EncryptorServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-
         $pimple['encryptor'] = function ($pimple) {
-			return new Encryptor($pimple);
+            return new Encryptor($pimple);
         };
     }
-
 }

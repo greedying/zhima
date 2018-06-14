@@ -30,9 +30,8 @@ class WatchlistServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-
         $pimple['watchlist'] = function ($pimple) {
-			return new Watchlist($pimple);
+            return new Watchlist($pimple);
         };
     }
 }

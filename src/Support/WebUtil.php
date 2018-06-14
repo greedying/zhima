@@ -7,28 +7,32 @@
  */
 namespace Greedying\Zhima\Support;
 
-class WebUtil{
+class WebUtil
+{
 
     /**
      * 将传入的参数组织成key1=value1&key2=value2形式的字符串
      * @param $params
      * @return string
      */
-    public static function buildQueryWithoutEncode($params) {
-       return WebUtil::buildQuery($params, false);
+    public static function buildQueryWithoutEncode($params)
+    {
+        return WebUtil::buildQuery($params, false);
     }
 
-    public static function buildQueryWithEncode($params){
+    public static function buildQueryWithEncode($params)
+    {
         return WebUtil::buildQuery($params, true);
     }
 
-    public static function buildQuery($params, $needEncode){
+    public static function buildQuery($params, $needEncode)
+    {
         ksort($params);
         $stringToBeSigned = "";
         $i = 0;
         foreach ($params as $k => $v) {
             if (false === WebUtil::checkEmpty($v)) {
-                if($needEncode){
+                if ($needEncode) {
                     $v = urlencode($v);
                 }
 
@@ -40,14 +44,15 @@ class WebUtil{
                 $i++;
             }
         }
-        unset ($k, $v);
+        unset($k, $v);
         return $stringToBeSigned;
     }
 
-    public static function trim($params){
-		return array_filter($params, function($k, $v) {
-			return $v;
-		}, ARRAY_FILTER_USE_BOTH);
+    public static function trim($params)
+    {
+        return array_filter($params, function ($k, $v) {
+            return $v;
+        }, ARRAY_FILTER_USE_BOTH);
     }
 
     /**
@@ -57,15 +62,18 @@ class WebUtil{
      * @param $value
      * @return bool
      */
-    public static function checkEmpty($value) {
-        if (!isset($value))
+    public static function checkEmpty($value)
+    {
+        if (!isset($value)) {
             return true;
-        if ($value === null)
+        }
+        if ($value === null) {
             return true;
-        if (trim($value) === "")
+        }
+        if (trim($value) === "") {
             return true;
+        }
 
         return false;
     }
-
 }

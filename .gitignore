@@ -2,3 +2,5 @@
 /composer.lock
 *.swp
 .*
+!.gitignore
+!.php_cs.dist
