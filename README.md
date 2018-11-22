@@ -155,11 +155,3 @@ $score = $zhima->isv->query($open_id, $transaction_id);
 
 ## License
 MIT
-
-## 你是个有耐心的人
-**招聘:** 
-作者正在创业期间，现欢迎各路贤达     
-坐标深圳，需要php和前端程序员   
-当然，市场推广和营销人员，如果您认识，也欢迎介绍     
-简历请发 greedying@163.com    
-期待与您共事   
